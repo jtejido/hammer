@@ -19,7 +19,9 @@ In spite of the number (and it's rate of growth) and effectiveness of so and so 
 
 
 
-This is an attempt at making a framework out of an otherwise duplicated approach of different EA algorithms (Others (i.e. swarm-based, quantum and simulated annealing, etc.) are still in my TO-DO list, and even though this has became a [problem](https://en.wikipedia.org/wiki/List_of_metaphor-based_metaheuristics#Criticism_of_the_metaphor_methodology) recently, their effectiveness is somewhat interesting to see in Information Retrieval). Hence, our acronym is HAMMER:
+This is an attempt at making a framework out of an otherwise duplicated approach of different EA algorithms (Others (i.e. swarm-based, quantum and simulated annealing, etc.) are still in my TO-DO list, and even though this has became a [problem](https://en.wikipedia.org/wiki/List_of_metaphor-based_metaheuristics#Criticism_of_the_metaphor_methodology) recently, their effectiveness is somewhat interesting to see in Information Retrieval). 
+
+Hence, our acronym is HAMMER:
 
 **-- if all you have is a hammer, everything looks like a nail.**
 
