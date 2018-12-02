@@ -48,7 +48,9 @@ go build
 ./bitstring_ga_compare
 ```
 
-The Result would converge to an optimal solution like so (though in a real-world scenario, such a target is unknown, and EAs are used as a combinatorial optimization method to achieve an otherwise unknown goal):
+The Result would converge to an optimal solution like so (though in a real-world scenario, such a target is unknown, and EAs are used as a combinatorial optimization method to achieve an otherwise unknown goal, if it is even achievable given the time or iterations):
+
+
 
 
 ```
