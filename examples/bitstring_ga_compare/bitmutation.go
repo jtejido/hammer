@@ -1,8 +1,8 @@
 package main
 
 import (
-	"math/rand"
 	. "github.com/jtejido/hammer"
+	"math/rand"
 )
 
 /**

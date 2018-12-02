@@ -6,7 +6,5 @@ type Evolution interface {
 	Evolve([]Individual, int) ([]Individual, error)
 	// Creates an initial set of inividuals
 	Create(int) ([]Individual, error)
-	OnElite(*Individual)	
+	OnElite(*Individual)
 }
-
-

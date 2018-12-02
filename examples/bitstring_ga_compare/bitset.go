@@ -37,7 +37,7 @@ func (b *Bitset) GetAll() []int {
 }
 
 func (b *Bitset) setImpl(index, value int) {
-	
+
 	b.bits[index] = value
 }
 

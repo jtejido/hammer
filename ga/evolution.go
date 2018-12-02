@@ -10,15 +10,15 @@ import (
 // * Selector - The selection component used to pick a random individual.
 // * SequenceCreator - used to create the initial population of genome splice.
 type GAEvolution struct {
-	Selector 		Selector
-	Reproduction 	Reproduction
+	Selector        Selector
+	Reproduction    Reproduction
 	SequenceCreator SequenceCreator
 }
 
 func NewEvolution(selector Selector, reproduction Reproduction, sequenceCreator SequenceCreator) Evolution {
 	return &GAEvolution{
-		Selector: selector,
-		Reproduction: reproduction,
+		Selector:        selector,
+		Reproduction:    reproduction,
 		SequenceCreator: sequenceCreator,
 	}
 }
@@ -63,4 +63,3 @@ func (evolution *GAEvolution) Create(populationSize int) ([]Individual, error) {
 func (evolution *GAEvolution) OnElite(elite *Individual) {
 	evolution.Reproduction.OnElite(elite)
 }
-

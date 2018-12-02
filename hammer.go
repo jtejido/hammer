@@ -14,29 +14,29 @@ const (
 // * Evaluator - an evaluation component used to test each individual's fitness.
 // * Evolver - an EA algorithm component used for generating and evolving population.
 type EvolutionAlgorithm struct {
-	EliteConsumer 			EliteConsumer
-	Evaluator     			Evaluator
-	Evolver 				Evolution
+	EliteConsumer EliteConsumer
+	Evaluator     Evaluator
+	Evolver       Evolution
 
-	populationSize          int // optional, when population isn't provided, used for creating population.
-	threadCount 			int // used for evaluation concurrency
-	population              []Individual // group of inidividuals
-	totalFitness            int // optional
-	individualChannel 		chan *Individual // used for syncing individuals
-	exitFunc                func(*Individual) bool // used as termination function per evaluation of an individual
-	waitGroup               *sync.WaitGroup // used for syncing individuals
+	populationSize    int                    // optional, when population isn't provided, used for creating population.
+	threadCount       int                    // used for evaluation concurrency
+	population        []Individual           // group of inidividuals
+	totalFitness      int                    // optional
+	individualChannel chan *Individual       // used for syncing individuals
+	exitFunc          func(*Individual) bool // used as termination function per evaluation of an individual
+	waitGroup         *sync.WaitGroup        // used for syncing individuals
 }
 
 func New(populationSize int, population []Individual, numThreads int) EvolutionAlgorithm {
 
 	return EvolutionAlgorithm{
-		EliteConsumer: 		&DefaultEliteConsumer{},
-		Evaluator:     		&DefaultEvaluator{},
-		Evolver:      		nil,
-		populationSize: 	populationSize,
-		population: 		population,
-		threadCount: 		numThreads,
-		waitGroup:			new(sync.WaitGroup),
+		EliteConsumer:  &DefaultEliteConsumer{},
+		Evaluator:      &DefaultEvaluator{},
+		Evolver:        nil,
+		populationSize: populationSize,
+		population:     population,
+		threadCount:    numThreads,
+		waitGroup:      new(sync.WaitGroup),
 	}
 
 }
@@ -138,7 +138,7 @@ func (ga *EvolutionAlgorithm) Simulate() bool {
 			return false
 		}
 
-		for i := 0; i < ga.populationSize; i ++ {
+		for i := 0; i < ga.populationSize; i++ {
 			ga.onNewIndividualToEvaluate(&newPopulation[i])
 		}
 

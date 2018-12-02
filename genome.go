@@ -5,7 +5,7 @@ type Genome interface {
 }
 
 type genome struct {
-	sequence  Sequence
+	sequence Sequence
 }
 
 func NewGenome(sequence Sequence) Genome {

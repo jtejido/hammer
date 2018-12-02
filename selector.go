@@ -23,7 +23,7 @@ func (s *DefaultSelector) Select(individuals []Individual, totalFitness int) Ind
 // 0 = never called, 1 = called every time we need a new individual to mate
 type SelectorFunction struct {
 	Probability float32
-	Func func([]Individual, int) Individual
+	Func        func([]Individual, int) Individual
 }
 
 type selector struct {

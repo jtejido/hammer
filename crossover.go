@@ -4,8 +4,8 @@ package hammer
 type CrossOverFunc func(*Individual, *Individual) (Individual, Individual)
 
 type CrossOverFunction interface {
-	GetProbability() 					float32
-	IsUseElite() 						bool
+	GetProbability() float32
+	IsUseElite() bool
 	CrossOver(*Individual, *Individual) (Individual, Individual)
 }
 
@@ -14,15 +14,15 @@ type CrossOverFunction interface {
 type CrossOver struct {
 	Probability float32
 	Func        CrossOverFunc
-	UseElite 	bool
+	UseElite    bool
 }
 
 // A helper struct to initiate a crossover
 func NewCrossOver(probability float32, useElite bool, f CrossOverFunc) CrossOverFunction {
 	return &CrossOver{
 		Probability: probability,
-		Func: f,
-		UseElite: useElite,
+		Func:        f,
+		UseElite:    useElite,
 	}
 }
 

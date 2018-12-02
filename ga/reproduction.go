@@ -1,22 +1,22 @@
 package ga
 
 import (
-	"math/rand"
 	. "github.com/jtejido/hammer"
+	"math/rand"
 )
 
 // GA Implementation of the Reproduction interface, this is almost what you need for a proper GA reproduction.
 type GAReproduction struct {
-	crossOverFuncs 	[]CrossOverFunction
-	mutatorFuncs 	[]MutatorFunction
-	elite       	*Individual
+	crossOverFuncs []CrossOverFunction
+	mutatorFuncs   []MutatorFunction
+	elite          *Individual
 }
 
 // NewReproduction returns an implementation of a Reproduction with several CrossOver and Mutator Funcs
 func NewReproduction(crossOverFuncs []CrossOverFunction, mutatorFuncs []MutatorFunction) Reproduction {
 	return &GAReproduction{
 		crossOverFuncs: crossOverFuncs,
-		mutatorFuncs: mutatorFuncs,
+		mutatorFuncs:   mutatorFuncs,
 	}
 }
 

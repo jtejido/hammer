@@ -5,12 +5,10 @@ import (
 	"github.com/jtejido/hammer"
 )
 
-
 /**
  * ELITE CONSUMER STRUCT
  * Implements EliteConsumer interface
  **/
-
 
 type eliteConsumer struct {
 	iteration int
