@@ -20,9 +20,7 @@ func (s *DefaultSelector) Select(individuals []Individual, totalFitness int) Ind
 
 // SelectorFunction -
 // Contains a selector function and a probability
-// where selector function 'F' is called with probability 'P'
-// where 'P' is a value between 0 and 1
-// 0 = never called, 1 = called every time we need a new genome to mate
+// 0 = never called, 1 = called every time we need a new individual to mate
 type SelectorFunction struct {
 	Probability float32
 	Func func([]Individual, int) Individual
@@ -33,13 +31,14 @@ type selector struct {
 }
 
 // NewSelector returns an instance of an Selector with several SelectorFunctionProbabiities
+// This is placed here as the selection process is the same across all EAs
 func NewSelector(selectorConfig []SelectorFunction) Selector {
 	return &selector{
 		selectorConfig: selectorConfig,
 	}
 }
 
-// Select - cycles through the selector function probabilities until one returns a genome
+// Select - cycles through the selector function probabilities until one returns an individual
 func (s *selector) Select(genomeArray []Individual, totalFitness int) Individual {
 	for {
 		for _, config := range s.selectorConfig {
@@ -50,7 +49,7 @@ func (s *selector) Select(genomeArray []Individual, totalFitness int) Individual
 	}
 }
 
-// Roulette is a selection function that selects a genome where genomes that have a higher fitness are more likely to be picked
+// Roulette is a selection function that selects an individual where genomes that have a higher fitness are more likely to be picked
 func Roulette(individuals []Individual, totalFitness int) Individual {
 
 	if len(individuals) == 0 {

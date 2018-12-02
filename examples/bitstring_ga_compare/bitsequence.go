@@ -6,7 +6,7 @@ import (
 )
 
 /**
- * SEQUENCE STRUCT
+ * SEQUENCE CREATOR STRUCT
  * Implements SequenceCreator interface
  **/
 

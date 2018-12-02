@@ -19,7 +19,7 @@ In spite of the number (and it's rate of growth) and effectiveness of so and so 
 
 
 
-This is an attempt at making a framework out of an otherwise sheer number of EA algorithm approaches. hence, our acronym HAMMER:
+This is an attempt at making a framework out of an otherwise duplicated approach of different EA algorithms (Others (i.e. swarm-based, quantum and simulated annealing, etc.) are still in my TO-DO list, and even though this has became a [problem](https://en.wikipedia.org/wiki/List_of_metaphor-based_metaheuristics#Criticism_of_the_metaphor_methodology) recently, their effectiveness is somewhat interesting to see in Information Retrieval). Hence, our acronym is HAMMER:
 
 **-- if all you have is a hammer, everything looks like a nail.**
 
@@ -28,7 +28,7 @@ The approach is a set of interfaces that pretty much summarizes the above steps.
 
 And therefore it is easy to separately inject each algorithms with a goal of minimizing and converging to a certain solution.
 
-I will only add as many EAs and samples as deemed possible, as this was only a sub-component of an IR research project that I do (and I use this primarily as a Relevance feedback research using a float64 vector/map genetic sequence and Cosine Similarity/Jaccard Similarity as fitness function) and the framework helps me at generalizing (and ultimately helping me avoid re-typing) GA/DE's similar parts.
+I will only add as many EAs and samples as deemed possible, as this was only a sub-component of an IR research project that I do (and I use this primarily as a Relevance feedback research tool using a float64 vector/map genetic sequence and Cosine Similarity/Jaccard Similarity as fitness function) and the framework helps me at generalizing (and ultimately helping me avoid re-typing) GA/GP/EP/DE's similar parts.
 
 
 Install via:

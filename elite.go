@@ -5,7 +5,7 @@ type EliteConsumer interface {
 	OnElite(*Individual)
 }
 
-// A nil Elite Consumer
+// A Default Elite Consumer that does nothing.
 type DefaultEliteConsumer struct {
 }
 

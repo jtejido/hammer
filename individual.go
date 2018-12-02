@@ -11,10 +11,10 @@ type individual struct {
 	genome  Genome
 }
 
+// A Individual implementation comprises a population.
 func NewIndividual(genome Genome) Individual {
 	return &individual{genome: genome}
 }
-
 func (i *individual) GetFitness() int {
 	return i.fitness
 }

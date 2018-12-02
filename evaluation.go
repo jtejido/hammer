@@ -8,6 +8,7 @@ type Evaluator interface {
 	Exit(*Individual) bool
 }
 
+// A Default Evaluator that does nothing.
 type DefaultEvaluator struct {
 }
 
