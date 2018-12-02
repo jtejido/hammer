@@ -28,6 +28,8 @@ The approach is a set of interfaces that pretty much summarizes the above steps.
 
 And therefore it is easy to separately inject each algorithms with a goal of minimizing and converging to a certain solution.
 
+I will only add as many EAs and samples as deemed possible, as this was only a sub-component of an IR research project that I do (and I use this primarily as a Relevance feedback research using a float64 vector/map genetic sequence and Cosine Similarity/Jaccard Similarity as fitness function) and the framework helps me at generalizing (and ultimately helping me avoid re-typing) GA/DE's similar parts.
+
 
 Install via:
 
