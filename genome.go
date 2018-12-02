@@ -1,17 +1,17 @@
 package hammer
 
 type Genome interface {
-	GetBits() *Bitset
+	GetSequence() Sequence
 }
 
 type genome struct {
-	bitset  Bitset
+	sequence  Sequence
 }
 
-func NewGenome(bitset Bitset) Genome {
-	return &genome{bitset: bitset}
+func NewGenome(sequence Sequence) Genome {
+	return &genome{sequence: sequence}
 }
 
-func (g *genome) GetBits() *Bitset {
-	return &g.bitset
+func (g genome) GetSequence() Sequence {
+	return g.sequence
 }

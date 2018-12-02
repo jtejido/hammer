@@ -1,6 +1,11 @@
-package hammer
+package main
 
-// Bitset - a simple bitset implementation
+import (
+	. "github.com/jtejido/hammer"
+)
+
+// Bitset - a simple bitset implementation for a Sequence Interface
+// This will be used plainly as a slice of 0s and 1s for our sample
 type Bitset struct {
 	size int
 	bits []int
@@ -13,13 +18,13 @@ func (b *Bitset) Create(size int) {
 }
 
 // GetSize returns the size of the bitset
-func (b *Bitset) GetSize() int {
+func (b Bitset) Len() int {
 	return b.size
 }
 
 // Get returns the value in the bitset at index 'index'
 // or -1 if the index is out of range
-func (b *Bitset) Get(index int) int {
+func (b Bitset) Get(index int) interface{} {
 	if index < b.size {
 		return b.bits[index]
 	}
@@ -37,12 +42,10 @@ func (b *Bitset) setImpl(index, value int) {
 }
 
 // Set assigns value 'value' to the bit at index 'index'
-func (b *Bitset) Set(index, value int) bool {
+func (b Bitset) Set(index int, value interface{}) {
 	if index < b.size {
-		b.setImpl(index, value)
-		return true
+		b.setImpl(index, value.(int))
 	}
-	return false
 }
 
 // SetAll assigns the value 'value' to all the bits in the set
@@ -53,7 +56,7 @@ func (b *Bitset) SetAll(value int) {
 }
 
 // CreateCopy returns a bit for bit copy of the bitset
-func (b *Bitset) CreateCopy() Bitset {
+func (b Bitset) Copy() Sequence {
 	newBitset := Bitset{}
 	newBitset.Create(b.size)
 	for i := 0; i < b.size; i++ {

@@ -1,11 +1,32 @@
 # hammer
 
-Heuristic Algorithms and Mathematical Models: An Expansive Repository
+Heuristic Algorithms and Minimization Methods: An Expansive Repository
+
+In artificial intelligence, an evolutionary algorithm (EA) is a subset of evolutionary computation.
+
+In spite of the number (and it's rate of growth) and effectiveness of so and so "novel" population-based algorithms, the steps at which they usually work around at can be summarized by the following steps:
+
+**Step One:** Generate the initial population of individuals randomly. (First generation)
+
+**Step Two:** Evaluate the fitness of each individual in that population (iteration limit, sufficient fitness achieved, etc.)
+
+**Step Three:** Repeat the following regenerational steps until termination:
+
+1. Select the best-fit individuals for reproduction. (Parents)
+2. Breed new individuals through crossover and mutation operations to give birth to offspring.
+3. Evaluate the individual fitness of new individuals.
+4. Replace least-fit population with new individuals.
 
 
-This is an attempt at making a framework out of existing heuristic algorithms.
+
+This is an attempt at making a framework out of an otherwise sheer number of EA algorithm approaches. hence, our acronym HAMMER:
 
 **-- if all you have is a hammer, everything looks like a nail.**
+
+
+The approach is a set of interfaces that pretty much summarizes the above steps.
+
+And therefore it is easy to separately inject each algorithms with a goal of minimizing and converging to a certain solution.
 
 
 Install via:
@@ -15,11 +36,12 @@ Install via:
 go get github.com/jtejido/hammer/
 ```
 
-Run the example via :
+Run the example at <GO_ROOT>/src/github.com/jtejido/hammer/examples/bitstring_ga_compare/ via :
 
 
 ```
-go run <GO_ROOT>/src/github.com/jtejido/hammer/examples/string/string.go
+go build
+./bitstring_ga_compare
 ```
 
 The Result would converge to an optimal solution like so:

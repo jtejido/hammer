@@ -10,48 +10,38 @@ const (
 )
 
 // EvolutionAlgorithm - The main simulator.
-// * Reproduction - combining evolved genomes
-// * EliteConsumer - an optional class that accepts the 'elite' of each population generation
+// * EliteConsumer - an optional class that accepts the 'elite' of each population generation.
 // * Evaluator - an evaluation component used to test each individual's fitness.
-// * BitsetCreate - used to create the initial population of genomes
+// * Evolver - an EA algorithm component used for generating and evolving population.
 type EvolutionAlgorithm struct {
-	Reproduction  			Reproduction
 	EliteConsumer 			EliteConsumer
 	Evaluator     			Evaluator
-	Selector      			Selector
-	PopulationCreator 		PopulationCreator
-	populationSize          int
-	threadCount 			int
-	population              []Individual
-	totalFitness            int
-	individualChannel chan *Individual
-	exitFunc                func(*Individual) bool
-	waitGroup               *sync.WaitGroup
-	parallelSimulations     int
+	Evolver 				Evolution
+
+	populationSize          int // optional, when population isn't provided, used for creating population.
+	threadCount 			int // used for evaluation concurrency
+	population              []Individual // group of inidividuals
+	totalFitness            int // optional
+	individualChannel 		chan *Individual // used for syncing individuals
+	exitFunc                func(*Individual) bool // used as termination function per evaluation of an individual
+	waitGroup               *sync.WaitGroup // used for syncing individuals
 }
 
 func New(populationSize int, population []Individual, numThreads int) EvolutionAlgorithm {
 
 	return EvolutionAlgorithm{
-		EliteConsumer: &DefaultEliteConsumer{},
-		Reproduction:  &DefaultReproduction{},
-		Evaluator:     &DefaultEvaluator{},
-		Selector:      &DefaultSelector{},
-		PopulationCreator:  &DefaultPopulationCreator{
-			&DefaultBitsetCreate{},
-		},
-		populationSize: populationSize,
-		population: 	population,
-		threadCount: 	numThreads,
-		waitGroup:		new(sync.WaitGroup),
+		EliteConsumer: 		&DefaultEliteConsumer{},
+		Evaluator:     		&DefaultEvaluator{},
+		Evolver:      		nil,
+		populationSize: 	populationSize,
+		population: 		population,
+		threadCount: 		numThreads,
+		waitGroup:			new(sync.WaitGroup),
 	}
 
 }
 
-func (ga *EvolutionAlgorithm) createPopulation() []Individual {
-	return ga.PopulationCreator.Populate(ga.populationSize)
-}
-
+// evaluate each individual concurrently
 func (ga *EvolutionAlgorithm) evaluate() {
 	ga.Evaluator.OnBeginEvaluation()
 	ga.totalFitness = 0
@@ -110,7 +100,17 @@ func (ga *EvolutionAlgorithm) Simulate() bool {
 	}
 
 	if ga.population == nil {
-		ga.population = ga.createPopulation()
+		pop, err_p := ga.Evolver.Create(ga.populationSize)
+
+		if err_p != nil {
+			return false
+		}
+
+		ga.population = pop
+	}
+
+	if ga.Evolver == nil {
+		return false
 	}
 
 	ga.evaluate()
@@ -122,7 +122,7 @@ func (ga *EvolutionAlgorithm) Simulate() bool {
 
 	for {
 		elite := ga.getElite()
-		ga.Reproduction.OnElite(elite)
+		ga.Evolver.OnElite(elite)
 		ga.EliteConsumer.OnElite(elite)
 		if ga.shouldExit(elite) {
 			break
@@ -132,21 +132,16 @@ func (ga *EvolutionAlgorithm) Simulate() bool {
 
 		ga.evaluate()
 
-		newPopulation := ga.createPopulation()
-		for i := 0; i < ga.populationSize; i += 2 {
-			g1 := ga.Selector.Select(ga.population, ga.totalFitness)
-			g2 := ga.Selector.Select(ga.population, ga.totalFitness)
+		newPopulation, err := ga.Evolver.Evolve(ga.population, ga.totalFitness)
 
-			g3, g4 := ga.Reproduction.Reproduce(g1, g2)
-
-			newPopulation[i] = g3
-			ga.onNewIndividualToEvaluate(&newPopulation[i])
-
-			if (i + 1) < ga.populationSize {
-				newPopulation[i+1] = g4
-				ga.onNewIndividualToEvaluate(&newPopulation[i+1])
-			}
+		if err != nil {
+			return false
 		}
+
+		for i := 0; i < ga.populationSize; i ++ {
+			ga.onNewIndividualToEvaluate(&newPopulation[i])
+		}
+
 		ga.population = newPopulation
 		ga.syncIndividuals()
 		ga.Evaluator.OnEndEvaluation()
