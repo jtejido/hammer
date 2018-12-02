@@ -109,4 +109,6 @@ hWäç$e±Ka°ä£êÈ¥él¬äynEÍñ 	 189
 54 	 Hello Eqrthlings! We come in pieces.. 	 295
 55 	 Hello Earthlings! We come in pieces. 	 295
 56 	 Hello Earthlings! We come in pieces.. 	 296
+1.154213734s
+Alloc = 3 MiB	TotalAlloc = 337 MiB	Sys = 12 MiB	NumGC = 111
 ```
